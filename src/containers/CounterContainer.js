@@ -15,11 +15,8 @@ export default connect(
     number: state.counter.number,
   }),
   dispatch =>
-    bindActionCreators(
-      {
-        increase,
-        decrease
-      },
-      dispatch
-    ),
+    {
+      increase,
+      decrease
+    },
   )(CounterContainer);
