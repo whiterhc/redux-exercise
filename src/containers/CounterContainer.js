@@ -14,9 +14,8 @@ export default connect(
   state => ({
     number: state.counter.number,
   }),
-  dispatch =>
-    {
-      increase,
-      decrease
-    },
-  )(CounterContainer);
+  {
+    increase,
+    decrease
+  },
+)(CounterContainer);
