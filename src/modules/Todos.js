@@ -1,8 +1,8 @@
 // 액션 타입 정의하기
-export const changeInput = () => ({ type: CHANGEINPUT })
-export const insert = () => ({ type: INSERT })
-export const toggle = () => ({ type: TOGGLE })
-export const remove = () => ({ type: REMOVE })
+const CHANGE_INPUT = 'todos/CHANGE_INPUT';
+const INSERT = 'todos/INSERT';
+const TOGGLE = 'todos/TOGGLE';
+const REMOVE = 'todos/REMOVE';
 
 // 액션 생성 함수
 export const changeInput = input => ({
