@@ -10,7 +10,7 @@ const REMOVE = 'todos/REMOVE';
 export const changeInput = createAction(CHANGE_INPUT, input => input);
 
 let id = 3;
-export const insert = createAction(INSERT, todo => ({
+export const insert = createAction(INSERT, text => ({
   id: id++;
   text,
   done: false
@@ -37,33 +37,23 @@ const initialState = {
 }
 
 // 리듀서 함수
-function todos(state = initialState, action) {
-  switch(action.type) {
-    case CHANGE_INPUT:
-      return {
-        ...state,
-        input: action.input
-      }
-    case INSERT:
-      return {
-        ...state,
-        todos: state.todos.concat(action.todo)
-      }
-    case TOGGLE:
-      return {
-        ...state,
-        todos: state.todos.map(todo =>
-          todo.id === action.id ? { ...todo, done: !todo.done } : todo
-        )
-      }
-    case REMOVE:
-      return {
-        ...state,
-        todos: state.todos.filter(todo => todo.id !== action.id)
-      };
-    default:
-      return state;
-  }
-}
+const todos = handleActions(
+  [CHANGE_INPUT]: (state, action) => ({ ...state, input: action.payload }),
+  [INSERT]: (state, action) => ({
+    ...state,
+    todos: state.todos.concat(action.payload),
+  }),
+  [TOGGLE]: (state, action) => ({
+    ...state,
+    todos: state.todos.map(todo =>
+      todo.id === action.payload ? { ...todo, done: !todo.done } : todo,
+    ),
+  }),
+  [REMOVE]: (state, action) => ({
+    ...state,
+    todos: state.todos.filter(todo => todo.id !== action.payload),
+  }),
+  initialState,
+);
 
 export default todos;
